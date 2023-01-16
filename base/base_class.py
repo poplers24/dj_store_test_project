@@ -53,17 +53,17 @@ class Base():
     def scroll_page(self, value):
         self.driver.execute_script(f"window.scrollTo(0, {value})")
 
+    """Method assert that the product has been added to the cart"""
+
     def assert_title_product_in_window_cart(self, title_product, title_in_window_cart):
         title_product_in_window_cart = title_in_window_cart.text
         assert title_product_in_window_cart in title_product, "Title product in cart does not match"
         print("Title product in the cart matches - " + title_product_in_window_cart)
 
-
     def assert_price_in_window_cart(self, price_product, price_in_window_cart):
-        price = price_product.text
         price_product_in_window_cart = price_in_window_cart.text
-        assert price in price_product_in_window_cart, "The price in the cart window does not match"
-        print("Price product - " + price + ". Price in window cart - " + price_product_in_window_cart)
+        assert price_product in price_product_in_window_cart, "The price in the cart window does not match"
+        print("Price in window cart - " + price_product_in_window_cart)
 
     # def assert_price_product_and_total_sum_in_window_cart(self, ):
 

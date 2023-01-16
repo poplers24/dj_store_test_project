@@ -54,7 +54,7 @@ class Main_page(Base):
     def cursor_on_category_nav_menu(self, category_nav_menu):
         action = ActionChains(self.driver)
         action.move_to_element(self.get_category_nav_menu(category_nav_menu)).perform()
-        print("Cursor on nav menu cetegory - " + category_nav_menu)
+        print("Cursor on nav menu category - " + category_nav_menu)
 
     def click_on_category_on_display_menu(self, category_on_display_menu):
         self.get_category_on_display_menu(category_on_display_menu).click()
