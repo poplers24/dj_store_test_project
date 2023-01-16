@@ -64,7 +64,6 @@ class Product_page(Base):
         self.get_button_add_to_cart().click()
         print("Click button Add to cart")
 
-
     def cursor_on_button_cart(self):
         action = ActionChains(self.driver)
         action.move_to_element(self.get_button_cart()).perform()
