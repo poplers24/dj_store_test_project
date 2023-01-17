@@ -5,6 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilites.logger import Logger
+
 
 class Catalog_page(Base):
 
@@ -127,26 +129,32 @@ class Catalog_page(Base):
 
     """Переходим в раздел через слайдер"""
     def go_to_next_section_in_slider(self, slider_category):
+        Logger.add_start_step(method="go_to_next_section_in_slider")
         self.click_slider_arrow_next()
         self.click_slider_category(slider_category)
         self.get_current_url()
         self.assert_h1(self.get_h1_catalog_page(), slider_category)
         self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), slider_category)
+        Logger.add_end_step(url=self.driver.current_url, method="go_to_next_section_in_slider")
 
     """Настраиваем диапазон цены ползунками и нажимаем кнопку применить"""
     def set_the_price_slider(self, x_left, x_right):
+        Logger.add_start_step(method="set_the_price_slider")
         self.scroll_page(400)
         self.interaction_left_slider_price(x_left)
         self.interaction_right_slider_price(x_right)
         self.click_button_filter()
         self.get_current_url()
+        Logger.add_end_step(url=self.driver.current_url, method="set_the_price_slider")
 
     def go_to_product_page(self, title_product):
+        Logger.add_start_step(method="go_to_product_page")
         self.scroll_page(500)
         self.click_title_product_in_catalog(title_product)
         self.get_current_url()
         self.assert_h1(self.get_h1_catalog_page(), title_product)
         self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), title_product)
+        Logger.add_end_step(url=self.driver.current_url, method="go_to_product_page")
 
 
 

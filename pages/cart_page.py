@@ -6,6 +6,8 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilites.logger import Logger
+
 
 class Cart_page(Base):
 
@@ -123,11 +125,14 @@ class Cart_page(Base):
     # Method
 
     def check_product_in_cart(self, title_product, price_product):
+        Logger.add_start_step(method="check_product_in_cart")
         self.assert_product_in_cart_items(title_product)
         self.assert_price_product_in_cart_items(price_product)
         self.assert_total_to_pay(price_product)
+        Logger.add_end_step(url=self.driver.current_url, method="check_product_in_cart")
 
     def ordering(self, email, fio, phone):
+        Logger.add_start_step(method="ordering")
         self.input_user_email(email)
         self.click_button_go_to_shipping_method()
         self.input_user_fio(fio)
@@ -136,6 +141,7 @@ class Cart_page(Base):
         self.click_radiobutton_pickup_msk()
         self.click_button_go_to_payment_method()
         self.payment_select_cash()
+        Logger.add_end_step(url=self.driver.current_url, method="ordering")
 
 
 

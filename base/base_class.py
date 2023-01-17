@@ -16,10 +16,10 @@ class Base():
     """Method Screenshot"""
 
     def get_screenshot(self):
-        now_date = datetime.datetime.now().strftime("%H.%M.%S7%Y.%m.%d")
+        now_date = datetime.datetime.now().strftime("%H.%M.%S.%Y.%m.%d")
         name_screenshot = 'screenshot_' + now_date + '.png'
         self.driver.save_screenshot(
-            '/Users/Maksim/Desktop/Python_auto/selenium_test_project_2/screen/' + name_screenshot)
+            '/Users/Maksim/Desktop/Python_auto/dj_store_test_project/screen/' + name_screenshot)
 
     """Method assert url"""
 

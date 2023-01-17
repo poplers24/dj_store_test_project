@@ -5,6 +5,8 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 from pages.catalog_page import Catalog_page
+from utilites.logger import Logger
+
 
 class Main_page(Base):
 
@@ -63,6 +65,7 @@ class Main_page(Base):
     # Method
 
     def go_to_catalog_via_hover_menu(self, category_nav_menu, category_on_display_menu):
+        Logger.add_start_step(method="go_to_catalog_via_hover_menu")
         self.open_site()
         self.get_current_url()
         self.click_catalog_button()
@@ -71,6 +74,7 @@ class Main_page(Base):
         self.get_current_url()
         self.assert_h1(self.get_h1_catalog_page(), category_on_display_menu)
         self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), category_on_display_menu)
+        Logger.add_end_step(url=self.driver.current_url, method="go_to_catalog_via_hover_menu")
 
 
 

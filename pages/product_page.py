@@ -5,6 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
+from utilites.logger import Logger
+
 
 class Product_page(Base):
 
@@ -81,12 +83,16 @@ class Product_page(Base):
     # Method
 
     def add_product_to_cart(self, title_product, price_product):
+        Logger.add_start_step(method="add_product_to_cart")
         self.click_button_add_to_cart()
         self.cursor_on_button_cart()
         self.assert_title_product_in_window_cart(title_product, self.get_window_cart_title_product())
         self.assert_price_in_window_cart(price_product, self.get_window_cart_price_product())
+        Logger.add_end_step(url=self.driver.current_url, method="add_product_to_cart")
 
     def go_to_cart_from_window_cart(self):
+        Logger.add_start_step(method="go_to_cart_from_window_cart")
         self.click_in_window_cart_button_go_to_cart()
         self.get_current_url()
         self.assert_h1(self.get_h1_page_cart(), "Корзина")
+        Logger.add_end_step(url=self.driver.current_url, method="go_to_cart_from_window_cart")
