@@ -29,6 +29,7 @@ def test_select_product():
     print("\nStart test")
 
     mp = Main_page(driver)
+    mp.open_main_page()
     mp.go_to_catalog_via_hover_menu(category_nav_menu, category_on_display_menu)
 
     cp = Catalog_page(driver)

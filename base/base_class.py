@@ -25,7 +25,7 @@ class Base():
 
     def assert_url(self, result):
         get_url = self.driver.current_url
-        assert get_url == result, "Value url does not match the expected result"
+        assert result in get_url, "Value url does not match the expected result"
         print("Good value url")
 
     """Method assert h1 page"""

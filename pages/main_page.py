@@ -22,6 +22,13 @@ class Main_page(Base):
     h1_catalog_page = "//h1[@itemprop='name']"
     breadcrumbs_now = "//li[@itemprop='itemListElement']/span[@itemprop='name']"
 
+    user_block_icon_authorization = "//div[@class='header clear']/div[@class='user-block']/ul/li/a[@href='/profile/login/']"
+    input_email = "//div[@id='auth-box']//input[@id='auth_l']"
+    input_password = "//div[@id='auth-box']//input[@id='auth_p']"
+    button_login = "//div[@id='auth-box']//button"
+    user_block_icon_profile = "//div[@class='header clear']/div[@class='user-block']/ul[@id='logged-block-ul']//span[1]"
+
+
     # Getters
 
     def get_catalog_button(self):
@@ -42,6 +49,22 @@ class Main_page(Base):
 
     def get_breadcrumbs_now(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.breadcrumbs_now)))
+
+    def get_user_block_icon_authorization(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.user_block_icon_authorization)))
+
+    def get_input_email(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_email)))
+
+    def get_input_password(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_password)))
+
+    def get_button_login(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.button_login)))
+
+    def get_user_block_icon_profile(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.user_block_icon_profile)))
+
 
     # Actions
 
@@ -66,7 +89,35 @@ class Main_page(Base):
         self.get_category_on_display_menu(category_on_display_menu).click()
         print("Click on category in display menu - " + category_on_display_menu)
 
+    def click_user_block_icon_authorization(self):
+        self.get_user_block_icon_authorization().click()
+        print("Click icon authorisation")
+
+    def input_user_email(self, email):
+        self.get_input_email().send_keys(email)
+        print("Input user email")
+
+    def input_user_password(self, password):
+        self.get_input_password().send_keys(password)
+        print("Input user password")
+
+    def click_button_login(self):
+        self.get_button_login().click()
+        print("Click button login")
+
+    def should_by_user_icon_signature_changed(self):
+        signature = self.get_user_block_icon_profile().text
+        assert signature == "Мой профиль", "Signature under the user icon has not changed"
+        print("Signature under the user icon changed")
+
     # Method
+
+    def open_main_page(self):
+        with allure.step("Open main page"):
+            Logger.add_start_step(method="open_main_page")
+            self.open_site()
+            self.get_current_url()
+            Logger.add_end_step(url=self.driver.current_url, method="open_main_page")
 
     def go_to_catalog_via_hover_menu(self, category_nav_menu, category_on_display_menu):
         with allure.step("Go to catalog via hover men"):
@@ -80,6 +131,22 @@ class Main_page(Base):
             self.assert_h1(self.get_h1_catalog_page(), category_on_display_menu)
             self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), category_on_display_menu)
             Logger.add_end_step(url=self.driver.current_url, method="go_to_catalog_via_hover_menu")
+
+    def authorization(self, email, password):
+        with allure.step("Authorization"):
+            Logger.add_start_step(method="authorization")
+            self.click_user_block_icon_authorization()
+            self.input_user_email(email)
+            self.input_user_password(password)
+            self.click_button_login()
+            self.get_current_url()
+            self.assert_url("/profile/")
+            self.should_by_user_icon_signature_changed()
+            Logger.add_end_step(url=self.driver.current_url, method="authorization")
+
+
+
+
 
 
 
