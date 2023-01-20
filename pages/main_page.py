@@ -1,4 +1,4 @@
-
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
@@ -45,19 +45,23 @@ class Main_page(Base):
 
     # Actions
 
+    @allure.step
     def open_site(self):
         self.driver.get(self.url)
         print("Browser open on the main page")
 
+    @allure.step
     def click_catalog_button(self):
         self.get_catalog_button().click()
         print("Click catalog button")
 
+    @allure.step
     def cursor_on_category_nav_menu(self, category_nav_menu):
         action = ActionChains(self.driver)
         action.move_to_element(self.get_category_nav_menu(category_nav_menu)).perform()
         print("Cursor on nav menu category - " + category_nav_menu)
 
+    @allure.step
     def click_on_category_on_display_menu(self, category_on_display_menu):
         self.get_category_on_display_menu(category_on_display_menu).click()
         print("Click on category in display menu - " + category_on_display_menu)
@@ -65,16 +69,17 @@ class Main_page(Base):
     # Method
 
     def go_to_catalog_via_hover_menu(self, category_nav_menu, category_on_display_menu):
-        Logger.add_start_step(method="go_to_catalog_via_hover_menu")
-        self.open_site()
-        self.get_current_url()
-        self.click_catalog_button()
-        self.cursor_on_category_nav_menu(category_nav_menu)
-        self.click_on_category_on_display_menu(category_on_display_menu)
-        self.get_current_url()
-        self.assert_h1(self.get_h1_catalog_page(), category_on_display_menu)
-        self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), category_on_display_menu)
-        Logger.add_end_step(url=self.driver.current_url, method="go_to_catalog_via_hover_menu")
+        with allure.step("Go to catalog via hover men"):
+            Logger.add_start_step(method="go_to_catalog_via_hover_menu")
+            self.open_site()
+            self.get_current_url()
+            self.click_catalog_button()
+            self.cursor_on_category_nav_menu(category_nav_menu)
+            self.click_on_category_on_display_menu(category_on_display_menu)
+            self.get_current_url()
+            self.assert_h1(self.get_h1_catalog_page(), category_on_display_menu)
+            self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), category_on_display_menu)
+            Logger.add_end_step(url=self.driver.current_url, method="go_to_catalog_via_hover_menu")
 
 
 
