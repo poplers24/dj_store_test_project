@@ -89,26 +89,31 @@ class Main_page(Base):
         self.get_category_on_display_menu(category_on_display_menu).click()
         print("Click on category in display menu - " + category_on_display_menu)
 
+    @allure.step
     def click_user_block_icon_authorization(self):
         self.get_user_block_icon_authorization().click()
         print("Click icon authorisation")
 
+    @allure.step
     def input_user_email(self, email):
         self.get_input_email().send_keys(email)
         print("Input user email")
 
+    @allure.step
     def input_user_password(self, password):
         self.get_input_password().send_keys(password)
         print("Input user password")
 
+    @allure.step
     def click_button_login(self):
         self.get_button_login().click()
         print("Click button login")
 
+    @allure.step
     def should_by_user_icon_signature_changed(self):
         signature = self.get_user_block_icon_profile().text
         assert signature == "Мой профиль", "Signature under the user icon has not changed"
-        print("Signature under the user icon changed")
+        print("Signature under the user icon changed on - " + signature)
 
     # Method
 
@@ -140,7 +145,7 @@ class Main_page(Base):
             self.input_user_password(password)
             self.click_button_login()
             self.get_current_url()
-            self.assert_url("/profile/")
+            self.assert_url("profile")
             self.should_by_user_icon_signature_changed()
             Logger.add_end_step(url=self.driver.current_url, method="authorization")
 

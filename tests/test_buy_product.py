@@ -45,6 +45,6 @@ def test_select_product():
     cp.check_product_in_cart(title_product, price_product)
     cp.ordering(email, fio, phone)
 
-    time.sleep(10)
+    time.sleep(5)
     driver.quit()
     print("Browser close")

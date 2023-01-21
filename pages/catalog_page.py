@@ -11,8 +11,6 @@ from utilites.logger import Logger
 
 class Catalog_page(Base):
 
-    url = "https://www.dj-store.ru/"
-
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
