@@ -85,6 +85,7 @@ class Profile_page(Base):
         with allure.step("Logout profile"):
             Logger.add_start_step(method="logout_profile")
             self.click_button_logout_profile()
+            self.get_current_url()
             self.should_by_user_icon_signature_changed()
             Logger.add_end_step(url=self.driver.current_url, method="logout_profile")
 
