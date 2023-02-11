@@ -73,6 +73,7 @@ class Profile_page(Base):
 
     # Method
 
+    """Checking that the authorized profile data matches what is expected"""
     def assert_profile_data(self, name, email, phone_number):
         with allure.step("Assert profile data"):
             Logger.add_start_step(method="assert_profile_data")
@@ -81,6 +82,7 @@ class Profile_page(Base):
             self.should_by_valid_profile_number_phone(phone_number)
             Logger.add_end_step(url=self.driver.current_url, method="assert_profile_data")
 
+    """Logout profile and checking that a logout has occurred"""
     def logout_profile(self):
         with allure.step("Logout profile"):
             Logger.add_start_step(method="logout_profile")

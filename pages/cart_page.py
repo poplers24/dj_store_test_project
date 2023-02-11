@@ -136,6 +136,7 @@ class Cart_page(Base):
 
     # Method
 
+    """Check that the item in the cart matches the item added"""
     def check_product_in_cart(self, title_product, price_product):
         with allure.step("Check product in cart"):
             Logger.add_start_step(method="check_product_in_cart")
@@ -144,6 +145,7 @@ class Cart_page(Base):
             self.assert_total_to_pay(price_product)
             Logger.add_end_step(url=self.driver.current_url, method="check_product_in_cart")
 
+    """Placing an order for goods"""
     def ordering(self, email, fio, phone):
         with allure.step("Ordering"):
             Logger.add_start_step(method="ordering")

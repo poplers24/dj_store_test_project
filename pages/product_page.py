@@ -87,6 +87,7 @@ class Product_page(Base):
 
     # Method
 
+    """Add item to cart"""
     def add_product_to_cart(self, title_product, price_product):
         with allure.step("Add product to cart"):
             Logger.add_start_step(method="add_product_to_cart")
@@ -96,6 +97,7 @@ class Product_page(Base):
             self.assert_price_in_window_cart(price_product, self.get_window_cart_price_product())
             Logger.add_end_step(url=self.driver.current_url, method="add_product_to_cart")
 
+    """Go to cart"""
     def go_to_cart_from_window_cart(self):
         with allure.step("Go to cart from window cart"):
             Logger.add_start_step(method="go_to_cart_from_window_cart")

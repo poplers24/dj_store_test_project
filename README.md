@@ -1,41 +1,39 @@
 # Dj_store_test_project
-Мой итоговый тестовый проект по курсу Автоматизации Python+Selenium
 
-Сайт для проекта: интернет магазин музыкальных инструментов, профессионального студийного и концертного оборудования https://www.dj-store.ru
+My Automation Test Project Python+Selenium
 
-В рамках задания выбран "smoke-тест"
+Website for the project: online store of musical instruments, professional studio and concert equipment https://www.dj-store.ru
 
-Кейс: выбор товара в катологе и оформление заказа
+Tests in the project:
 
-1. Открыть сайт https://www.dj-store.ru
-2. Нажать на кнопку "Каталог товаров"
-3. В выпадающем списке категорий каталога навести курсор на пункт "Клавиши"
-4. В появившемся меню нажать на категорию "Синтезаторы"
-5. Проверить, что перешли на страницу верной катогории по заголовку страницы и хлебным крошкам
-6. Через слайдер подкатегорий выбрать и перейти в подкатегорию "Звуковые модули"
-7. Проверить, что перешли на верную страницу подкатегории по заголовку страницы и хлебным крошкам
-8. В фильтре выставить цену примерно от 80000 до 200000
-9. Нажать кнопку "Применить"
-10. В сформированном по цене списку товаров выбрать и прейти на страницу товара "Драм-машина Vermona DRM 1 MKIII Trigger Chrom"
-11. Проверить, что перешли на страницу нужного товара по заголовку страницы и хлебным крошкам
-12. Нажать кнопку "Добавить в корзину"
-13. Навести курсор на иконку "Корзина"
-14. В появившемся окне корзины проверить по названию, что добавилася именно тот товар и цена товара и тоговая сумма в корзине соответствует
-15. В окне корзины нажать кнопку "Перейти в корзину"
-16. Проверить, что перешли на траницу "Корзина" по заголовку страницы
-17. Проверить, что в корзине присутствует нужный товар, цена товара и сумма корзины соответствуют
-18. Заполнить поле email
-19. Нажать кнопку "Перейти к способу доставки"
-20. Заполнить поле "Имя и фамилия"
-21. Заполнить поле "Телефон"
-22. Выбрать Способ доставки "Самовывоз"
-23. Вырать адрес "Москва..."
-24. Нажать на кнопку "Перейти к способу оплаты"
-25. Выбрать Способ оплаты "Наличными при получении"
+1. Selecting a product in the catalog and placing an order 
+    
 
-На этом стоп, т.к. дальше идет оформление заказа
+    pytest -s -v tests/test_buy_product.py::test_select_product
+   
 
-тест test_by_product.py
+    With a report Allure 
+    pytest --alluredir=test_results/ tests/test_buy_product.py::test_select_product
+
+
+2. Authorization
+   
+
+    pytest -s -v tests/test_authorization::test_login_logout
+
+    With a report Allure
+    pytest --alluredir=test_results/ tests/test_authorization::test_login_logout
+
+
+3. Change of region
+
+
+    pytest -s -v tests/test_region_change.py::test_region_change
+
+    With a report Allure
+    pytest --alluredir=test_results/ tests/test_region_change.py::test_region_change
+
+
 
 
 

@@ -1,0 +1,42 @@
+
+Start test
+Browser open on the main page
+Current url https://www.dj-store.ru/
+Click catalog button
+Cursor on nav menu category - Клавиши
+Click on category in display menu - Синтезаторы
+Current url https://www.dj-store.ru/oborudovanie/klavishi/sintezatory/
+Good value h1 page - Синтезаторы
+Good value breadcrumbs now page - Синтезаторы
+Click slider arrow next
+Click slider category - Звуковые модули
+Current url https://www.dj-store.ru/oborudovanie/klavishi/sintezatory/zvukovye-moduli/
+Good value h1 page - Звуковые модули
+Good value breadcrumbs now page - Звуковые модули
+Slider moved to the right
+Slider moved to the left
+Click button filter
+Current url https://www.dj-store.ru/oborudovanie/klavishi/sintezatory/zvukovye-moduli/?f=81206&t=203015
+Click on title product in catalog
+Current url https://www.dj-store.ru/oborudovanie/klavishi/drammashiny/27206_vermona-drm-1-mkiii-trigger-chrom.html
+Good value h1 page - Драм-машина Vermona DRM 1 MKIII Trigger Chrom
+Good value breadcrumbs now page - Vermona DRM 1 MKIII Trigger Chrom
+Click button Add to cart
+Cursor on button cart
+Title product in the cart matches - Vermona DRM 1 MKIII Trigger Chrom
+Price in window cart - 124 571 ₽
+Click button go to cart in window cart
+Current url https://www.dj-store.ru/cart/
+Good value h1 page - Корзина
+Items in cart match
+Price product in cart match
+Order amount is correct
+Input user email
+Click button go to shipping method
+Input user fio
+Input user phone
+Click button pickup
+Click radiobutton pickup msk
+Click button go to payment method
+Select payment cash
+Browser close

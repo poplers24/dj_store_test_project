@@ -8,31 +8,24 @@ from pages.cart_page import Cart_page
 from pages.main_page import Main_page
 from pages.catalog_page import Catalog_page
 from pages.product_page import Product_page
-from pages.profile_page import Profile_page
 
-
-def test_login_logout():
+@allure.description("Test sregion change")
+def test_region_change():
+    """Изменение региона"""
     driver = webdriver.Chrome("/Users/Maksim/Desktop/Python_auto/resource/chromedriver")
 
     #Test data
 
-    email = "gofigure844@gmail.com"
-    password = "13Zumla4"
-
-    name = "Иван Григорьев"
-    number_phone = "8-929-0000010"
+    city = "Москва"
 
     print("\nStart test")
 
-    """We open the site on the man page and login"""
+    """We open the site on the man page"""
     mp = Main_page(driver)
     mp.open_main_page()
-    mp.authorization(email, password)
 
-    """Check that authorization has passed and the user data matches"""
-    pp = Profile_page(driver)
-    pp.assert_profile_data(name, email, number_phone)
-    pp.logout_profile()
+    """Changing the region"""
+    mp.region_selection(city)
 
     time.sleep(5)
     driver.quit()

@@ -1,7 +1,9 @@
+import time
+
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.support import expected_conditions as EC
 from base.base_class import Base
 from pages.catalog_page import Catalog_page
@@ -27,6 +29,8 @@ class Main_page(Base):
     input_password = "//div[@id='auth-box']//input[@id='auth_p']"
     button_login = "//div[@id='auth-box']//button"
     user_block_icon_profile = "//div[@class='header clear']/div[@class='user-block']/ul[@id='logged-block-ul']//span[1]"
+    city_name_topmenu = "//aside[@class='main-menu hide_in_the_basket_section']/ul/li/a[@id='city_name_topmenu']"
+    input_city_choose = "//input[@id='city_chooser_top']"
 
 
     # Getters
@@ -64,6 +68,12 @@ class Main_page(Base):
 
     def get_user_block_icon_profile(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.user_block_icon_profile)))
+
+    def get_city_name_topmenu(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.city_name_topmenu)))
+
+    def get_input_city_choose(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.input_city_choose)))
 
 
     # Actions
@@ -115,8 +125,29 @@ class Main_page(Base):
         assert signature == "Мой профиль", "Signature under the user icon has not changed"
         print("Signature under the user icon changed on - " + signature)
 
+    @allure.step
+    def click_city_name_topmenu(self):
+        self.get_city_name_topmenu().click()
+        print("Click button city topmenu")
+
+    @allure.step
+    def input_choose_city(self, city):
+        self.get_input_city_choose().send_keys(city)
+        time.sleep(1)
+        self.get_input_city_choose().send_keys(Keys.DOWN)
+        self.get_input_city_choose().send_keys(Keys.RETURN)
+        print("Enter and select a city")
+
+    @allure.step
+    def should_by_city_name_in_topmenu(self, city):
+        time.sleep(1)
+        city_name = self.get_city_name_topmenu().text
+        assert city_name == city, f"The selected city {city_name} does not match the expected {city}"
+        print(f"The location is displayed correct - {city_name}")
+
     # Method
 
+    """Open the site on main page"""
     def open_main_page(self):
         with allure.step("Open main page"):
             Logger.add_start_step(method="open_main_page")
@@ -124,11 +155,10 @@ class Main_page(Base):
             self.get_current_url()
             Logger.add_end_step(url=self.driver.current_url, method="open_main_page")
 
+    """Go to the catalog by the menu that opens by clicking the catalog button"""
     def go_to_catalog_via_hover_menu(self, category_nav_menu, category_on_display_menu):
         with allure.step("Go to catalog via hover men"):
             Logger.add_start_step(method="go_to_catalog_via_hover_menu")
-            self.open_site()
-            self.get_current_url()
             self.click_catalog_button()
             self.cursor_on_category_nav_menu(category_nav_menu)
             self.click_on_category_on_display_menu(category_on_display_menu)
@@ -137,6 +167,7 @@ class Main_page(Base):
             self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), category_on_display_menu)
             Logger.add_end_step(url=self.driver.current_url, method="go_to_catalog_via_hover_menu")
 
+    """Open the authorization window and enter the login and password"""
     def authorization(self, email, password):
         with allure.step("Authorization"):
             Logger.add_start_step(method="authorization")
@@ -148,6 +179,16 @@ class Main_page(Base):
             self.assert_url("profile")
             self.should_by_user_icon_signature_changed()
             Logger.add_end_step(url=self.driver.current_url, method="authorization")
+
+    """Open the window for changing the region and select another region"""
+    def region_selection(self, city):
+        with allure.step("Region selection"):
+            Logger.add_start_step(method="region_selection")
+            self.click_city_name_topmenu()
+            self.input_choose_city(city)
+            self.should_by_city_name_in_topmenu(city)
+            Logger.add_end_step(url=self.driver.current_url, method="region_selection")
+
 
 
 

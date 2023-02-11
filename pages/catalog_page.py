@@ -136,7 +136,7 @@ class Catalog_page(Base):
 
     # Method
 
-    """Переходим в раздел через слайдер"""
+    """Go to the section through the slider"""
     def go_to_next_section_in_slider(self, slider_category):
         with allure.step("Go to next section in slider"):
             Logger.add_start_step(method="go_to_next_section_in_slider")
@@ -147,7 +147,7 @@ class Catalog_page(Base):
             self.assert_breadcrumbs_now(self.get_breadcrumbs_now(), slider_category)
             Logger.add_end_step(url=self.driver.current_url, method="go_to_next_section_in_slider")
 
-    """Настраиваем диапазон цены ползунками и нажимаем кнопку применить"""
+    """Adjust the price range using the sliders in the filter and click the apply button"""
     def set_the_price_slider(self, x_left, x_right):
         with allure.step("Set the price slider"):
             Logger.add_start_step(method="set_the_price_slider")
@@ -158,6 +158,7 @@ class Catalog_page(Base):
             self.get_current_url()
             Logger.add_end_step(url=self.driver.current_url, method="set_the_price_slider")
 
+    """Go to the product page and check that the page of the desired product has opened"""
     def go_to_product_page(self, title_product):
         with allure.step("Go to product page"):
             Logger.add_start_step(method="go_to_product_page")
